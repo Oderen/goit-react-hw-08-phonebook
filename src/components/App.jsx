@@ -1,16 +1,14 @@
+import { Routes, Route } from 'react-router-dom';
+import { lazy } from 'react';
+
+import SignIn from './Auth-form/SignIn';
+import NavigationBar from './Navigation-bar/NavigationBar';
+
 export const App = () => {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
+    <div>
+      <NavigationBar />
+      <SignIn />
     </div>
   );
 };
