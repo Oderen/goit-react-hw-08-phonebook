@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { lazy, useEffect, useRef } from 'react';
+import { lazy, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import Layout from './Layout';
@@ -16,17 +16,21 @@ const ContactsPage = lazy(() => import('../p/Contacts.js'));
 
 const App = () => {
   const dispatch = useDispatch();
-  const isFirstRender = useRef(true);
+  // const isFirstRender = useRef(true);
   const isRefreshingCurrentUser = useSelector(state => state.auth.isRefreshing);
 
+  /* eslint-disable */
+
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
+    // if (isFirstRender.current) {
+    //   isFirstRender.current = false;
+    //   return;
+    // }
 
     dispatch(fetchCurrentUser());
   }, []);
+  /* eslint-enable */
+
   return isRefreshingCurrentUser ? (
     <Loader />
   ) : (

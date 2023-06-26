@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 import { fetchContacts, deleteContact, addContact } from 'redux/ApiOperations';
 import {
@@ -15,7 +15,7 @@ import ContactForm from '../components/ContactFrom/ContactFrom.jsx';
 import Filter from '../components/Filter/Filter.jsx';
 
 const Contacts = () => {
-  const isFirstRender = useRef(true);
+  // const isFirstRender = useRef(true);
   const dispatch = useDispatch();
 
   const contacts = useSelector(selectContacts);
@@ -24,10 +24,10 @@ const Contacts = () => {
   const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
+    // if (isFirstRender.current) {
+    //   isFirstRender.current = false;
+    //   return;
+    // }
     dispatch(fetchContacts());
   }, [dispatch]);
 
