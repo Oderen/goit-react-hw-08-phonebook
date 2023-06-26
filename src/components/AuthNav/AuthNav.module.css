@@ -1,5 +1,7 @@
 .authintification {
   width: 20%;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .authintification__list {
