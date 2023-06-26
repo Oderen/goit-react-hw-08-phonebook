@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/965.f3ac6770.chunk.js","mappings":"iKAIA,UAJa,WACX,OAAO,eAAIA,MAAO,CAAEC,WAAY,IAAzB,SAA+B,QACvC,C","sources":["p/Home.js"],"sourcesContent":["const Home = () => {\n  return <h1 style={{ marginLeft: 30 }}>Home</h1>;\n};\n\nexport default Home;\n"],"names":["style","marginLeft"],"sourceRoot":""}
