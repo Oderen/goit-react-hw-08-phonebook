@@ -13,6 +13,7 @@ const HomePage = lazy(() => import('../p/Home.js'));
 const RegisterPage = lazy(() => import('../p/Register.js'));
 const LoginPage = lazy(() => import('../p/Login.js'));
 const ContactsPage = lazy(() => import('../p/Contacts.js'));
+console.log('1');
 
 const App = () => {
   const dispatch = useDispatch();
