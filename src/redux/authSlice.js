@@ -6,6 +6,7 @@ const initialState = {
   token: null,
   isLogged: false,
   isRefreshing: false,
+  isAuthProblem: { isRegProblem: false, isLogProblem: false },
 };
 
 const authSlice = createSlice({
@@ -18,6 +19,10 @@ const authSlice = createSlice({
         state.user.email = action.payload.user.email;
         state.token = action.payload.token;
         state.isLogged = true;
+        state.isAuthProblem.isRegProblem = false;
+      })
+      .addCase(registerUser.rejected, state => {
+        state.isAuthProblem.isRegProblem = true;
       })
       .addCase(logIn.fulfilled, (_, action) => {
         return {
@@ -27,7 +32,11 @@ const authSlice = createSlice({
           },
           token: action.payload.token,
           isLogged: true,
+          isAuthProblem: { isRegProblem: false, isLogProblem: false },
         };
+      })
+      .addCase(logIn.rejected, state => {
+        state.isAuthProblem.isLogProblem = true;
       })
       .addCase(logOut.fulfilled, state => {
         state.user = { name: null, email: null };

@@ -12,11 +12,11 @@ export const contactsSlice = createSlice({
       .addCase(fetchContacts.pending, state => {
         return { ...state, isLoading: true };
       })
-      .addCase(fetchContacts.fulfilled, (state, action) => {
+      .addCase(fetchContacts.fulfilled, (_, action) => {
         return {
           isLoading: false,
           error: null,
-          items: [...state.items, ...action.payload],
+          items: action.payload,
         };
       })
       .addCase(fetchContacts.rejected, state => {
@@ -66,36 +66,3 @@ export const contactsSlice = createSlice({
 });
 
 export const { add, remove } = contactsSlice.actions;
-
-// Варіант 2 -- Slice
-
-//  const fetchContactsRequest = createAction(
-//   'contacts/fetchContactsRequest'
-// );
-//  const fetchContactsSuccess = createAction(
-//   'contacts/fetchContactsSuccess'
-// );
-//  const fetchContactsError = createAction('contacts/fetchContactsError');
-
-// const success = createReducer([], {
-//   [fetchContacts.fulfilled]: (_, action) => action.payload,
-// });
-
-// const error = createReducer(null, {
-//   [fetchContacts.pending]: () => null,
-//   [fetchContacts.rejected]: (_, action) => action.payload,
-// });
-
-// const isLoading = createReducer(false, {
-//   [fetchContacts.pending]: () => true,
-//   [fetchContacts.fulfilled]: () => false,
-//   [fetchContacts.rejected]: () => true,
-// });
-
-// export const combined = combineReducers({
-//   success,
-//   error,
-//   isLoading,
-// });
-
-// Закидування combined в store/contacts

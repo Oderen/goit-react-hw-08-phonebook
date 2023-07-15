@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, createSlice } from '@reduxjs/toolkit';
 import { filterSlice } from './filterReducer';
 import { contactsSlice } from './contactsReducer';
 import authSLice from './authSlice';
@@ -27,11 +27,58 @@ const persistedAuthReducer = persistReducer(
   authSLice.reducer
 );
 
+const isNavActiveSlice = createSlice({
+  name: 'isNavActive',
+  initialState: {
+    isImgNavActive: false,
+    isMovieNavActive: false,
+    isPhonebookNavActive: false,
+  },
+  reducers: {
+    changeImgNavStatus: state => {
+      return {
+        isImgNavActive: !state.isImgNavActive,
+        isMovieNavActive: false,
+        isPhonebookNavActive: false,
+      };
+    },
+    changeMovieNavStatus: state => {
+      return {
+        isImgNavActive: false,
+        isMovieNavActive: !state.isMovieNavActive,
+        isPhonebookNavActive: false,
+      };
+    },
+    changePhonebookNavStatus: state => {
+      return {
+        isImgNavActive: false,
+        isMovieNavActive: false,
+        isPhonebookNavActive: !state.isPhonebookNavActive,
+      };
+    },
+    resetLinks: () => {
+      return {
+        isImgNavActive: false,
+        isMovieNavActive: false,
+        isPhonebookNavActive: false,
+      };
+    },
+  },
+});
+
+export const {
+  changeImgNavStatus,
+  changeMovieNavStatus,
+  changePhonebookNavStatus,
+  resetLinks,
+} = isNavActiveSlice.actions;
+
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
     contacts: contactsSlice.reducer,
     filter: filterSlice.reducer,
+    isNavActive: isNavActiveSlice.reducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

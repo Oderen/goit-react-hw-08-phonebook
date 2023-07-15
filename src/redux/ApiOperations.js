@@ -10,6 +10,8 @@ const token = {
   },
 };
 
+axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
+
 // Contacts
 
 export const fetchContacts = createAsyncThunk(
@@ -17,9 +19,8 @@ export const fetchContacts = createAsyncThunk(
 
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get(
-        'https://connections-api.herokuapp.com/contacts'
-      );
+      const { data } = await axios.get('/contacts');
+
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -32,15 +33,12 @@ export const addContact = createAsyncThunk(
 
   async (newContact, { rejectWithValue }) => {
     try {
-      const fetchedNewContact = await axios.post(
-        'https://648c0d7c8620b8bae7ec2201.mockapi.io/contacts',
-        newContact
-      );
+      const fetchedNewContact = await axios.post('/contacts', newContact);
+
       return {
-        createdAt: fetchedNewContact.data.createdAt,
         id: fetchedNewContact.data.id,
         name: fetchedNewContact.data.name,
-        phone: fetchedNewContact.data.phone,
+        number: fetchedNewContact.data.number,
       };
     } catch (error) {
       return rejectWithValue(error);
@@ -53,9 +51,7 @@ export const deleteContact = createAsyncThunk(
 
   async (contactID, { rejectWithValue }) => {
     try {
-      await axios.delete(
-        `https://648c0d7c8620b8bae7ec2201.mockapi.io/contacts/${contactID}`
-      );
+      await axios.delete(`/contacts/${contactID}`);
       return contactID;
     } catch (error) {
       return rejectWithValue(error);
@@ -65,17 +61,16 @@ export const deleteContact = createAsyncThunk(
 
 // Auth
 
-axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
-
 export const registerUser = createAsyncThunk(
   'auth/register',
   async credentials => {
     try {
       const { data } = await axios.post('/users/signup', credentials);
       token.set(data.token);
+
       return data;
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   }
 );
@@ -86,7 +81,7 @@ export const logIn = createAsyncThunk('auth/login', async credentials => {
     token.set(data.token);
     return data;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 });
 

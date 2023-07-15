@@ -10,17 +10,39 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+
 import { logIn } from '../../redux/ApiOperations';
+import css from './LoginForm.module.css';
 
 export default function LoginForm() {
   const dispatch = useDispatch();
 
+  const [isEmailWrong, setEmailValidation] = useState(false);
+  const [isPasswordWrong, setPasswordValidation] = useState(false);
+
+  const isLogProblem = useSelector(
+    state => state.auth.isAuthProblem.isLogProblem
+  );
+
   const handleSubmit = event => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+
     const email = data.get('email');
     const password = data.get('password');
+
+    if (email === '') {
+      return setEmailValidation(true);
+    }
+    setEmailValidation(false);
+
+    if (password.length > 6) {
+      setPasswordValidation(false);
+    } else {
+      return setPasswordValidation(true);
+    }
 
     const userData = {
       name: email.split('@')[0],
@@ -42,7 +64,7 @@ export default function LoginForm() {
           alignItems: 'center',
         }}
       >
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+        <Avatar sx={{ m: 1, bgcolor: '#003262' }}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
@@ -50,14 +72,18 @@ export default function LoginForm() {
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
+            id="email"
+            name="email"
+            type="email"
+            label="Email Address"
+            placeholder="example.something@gmail.com"
+            autoComplete="email"
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
             autoFocus
+            error={isEmailWrong || isLogProblem ? true : false}
+            helperText={isEmailWrong ? 'Invalid email. Please try again' : ''}
           />
           <TextField
             margin="normal"
@@ -67,13 +93,27 @@ export default function LoginForm() {
             label="Password"
             type="password"
             id="password"
+            error={isPasswordWrong || isLogProblem ? true : false}
+            helperText={
+              !isPasswordWrong
+                ? ''
+                : 'Password must contain at leat 7 characters'
+            }
             autoComplete="current-password"
           />
+          {isLogProblem && (
+            <div style={{ marginTop: 10 }}>
+              <p style={{ margin: 0, color: 'red' }}>
+                Wrong email or password. Please try again
+              </p>
+            </div>
+          )}
           <Button
             type="submit"
             fullWidth
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 2, mb: 2 }}
+            className={css.loginButton}
           >
             Log In
           </Button>
@@ -82,8 +122,12 @@ export default function LoginForm() {
               <Link
                 href="http://localhost:3000/goit-react-hw-08-phonebook/register"
                 variant="body2"
+                style={{ textDecoration: 'none' }}
               >
-                {"Don't have an account? Sign Up"}
+                <p className={css.loginLink}>
+                  <span>Don't have an account?</span>
+                  <span style={{ marginLeft: 5 }}>Sign Up</span>
+                </p>
               </Link>
             </Grid>
           </Grid>
