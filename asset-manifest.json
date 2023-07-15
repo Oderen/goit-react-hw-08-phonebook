@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Oderen/my-projects.git/static/css/main.f51cd15d.css",
-    "main.js": "/Oderen/my-projects.git/static/js/main.28912afd.js",
+    "main.js": "/Oderen/my-projects.git/static/js/main.b5fd3b61.js",
     "static/css/290.15f088c6.chunk.css": "/Oderen/my-projects.git/static/css/290.15f088c6.chunk.css",
     "static/js/290.e3a1fb54.chunk.js": "/Oderen/my-projects.git/static/js/290.e3a1fb54.chunk.js",
     "static/css/6.66c60f08.chunk.css": "/Oderen/my-projects.git/static/css/6.66c60f08.chunk.css",
@@ -19,7 +19,7 @@
     "static/js/920.e783f283.chunk.js": "/Oderen/my-projects.git/static/js/920.e783f283.chunk.js",
     "index.html": "/Oderen/my-projects.git/index.html",
     "main.f51cd15d.css.map": "/Oderen/my-projects.git/static/css/main.f51cd15d.css.map",
-    "main.28912afd.js.map": "/Oderen/my-projects.git/static/js/main.28912afd.js.map",
+    "main.b5fd3b61.js.map": "/Oderen/my-projects.git/static/js/main.b5fd3b61.js.map",
     "290.15f088c6.chunk.css.map": "/Oderen/my-projects.git/static/css/290.15f088c6.chunk.css.map",
     "290.e3a1fb54.chunk.js.map": "/Oderen/my-projects.git/static/js/290.e3a1fb54.chunk.js.map",
     "6.66c60f08.chunk.css.map": "/Oderen/my-projects.git/static/css/6.66c60f08.chunk.css.map",
@@ -38,6 +38,6 @@
   },
   "entrypoints": [
     "static/css/main.f51cd15d.css",
-    "static/js/main.28912afd.js"
+    "static/js/main.b5fd3b61.js"
   ]
 }
